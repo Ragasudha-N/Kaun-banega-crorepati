@@ -1,0 +1,65 @@
+import time
+
+Last_Prize = 0
+current_question = 0
+
+Questions = [
+    "1. Blue Line term, recently seen in the news, serves as the boundary between which of the following two countries?",
+    "2. Recently, which university conferred President Murmu with the Honorary Degree of Doctor of Civil Law?",
+    "3. Ranjit Sagar Dam (Thein dam) is a gigantic Multipurpose River valley Project on which among the following rivers?",
+    "4. Who wrote the play 'Romeo and Juliet'?",
+    "5. Which state government has tabled the ‘Right to Healthcare Bill’??",
+    "6. What does the acronym 'URL' stand for?",
+    "7. Who directed the movie Jurassic Park?",
+    "8. What is the capital city of Australia?",
+    "9. In what country are the Pyramids of Giza located?",
+    "10. How many stars are there on the flag of China?"
+]
+
+prize_money = [20000, 40000, 80000, 160000, 320000, 640000, 1250000, 2500000, 5000000, 10000000]
+
+Options = [
+    ['a) North Korea and South Korea b)  Lebanon and Israel c) India and China d) Sudan and Libya'],
+    ['a) University of Chicago b) University of Mauritius c)University of Melbourne  d) University of Pennsylvania'],
+    ['a)Ravi b)sutlej c)Jhelum d)Indus'],
+    ['a) Charles Dickens b) William Shakespeare c) Jane Austen d) Mark Twain'],
+    ['a) Tamil Nadu b)  Kerala c) Gujarat d)Rajasthan '],
+    ['a) Universal Resource Locator b) Uniform Resource Locator c) Unified Resource Locator d) Unifying Resource Locator'],
+    ['a) Steven Spielberg  b) George Lucas c) Michael Bay d) Stanley Kubrick'],
+    ['a) Sydney b) Canberra c) Melbourne d) Perth'],
+    ['a) Iran b)  Iraq c) Egypt d)  Saudi Arabia'],
+    ['a)1 b) 3 c) 5 d) 7']
+]
+
+solutions = ('b', 'b', 'a', 'b', 'd', 'b', 'a', 'b', 'c', 'c')
+
+def check_answer():
+    global Last_Prize, current_question
+    select = input("\nChoose any one option (a, b, c, d): ").lower()
+    if select == solutions[current_question]:
+        print("\nThe answer is correct!")
+        Last_Prize = prize_money[current_question]
+        current_question += 1
+        if current_question < 10:
+            load_question(current_question)
+        else:
+            print(f"\nCongratulations! You won a total of {Last_Prize} rupees.")
+    else:
+        print("\nThe answer is Wrong! Game Over.")
+        print(f"\nYou won a total of {Last_Prize} rupees.")
+        exit()
+
+def load_question(question_number):
+    print('\n*****************\n')
+    print(f"The {question_number + 1} question on the screen\n")
+    print(Questions[question_number])
+    print('\n'.join(Options[question_number]))  
+
+player_name = input("Enter your name: ")
+
+print(f"Welcome {player_name}")
+
+for i in range(10):
+    time.sleep(1/2)  
+    load_question(i)
+    check_answer()
